@@ -1,0 +1,73 @@
+{%extends 'layout.html'%}
+
+{%block title%}
+<title>Home</title>
+<style>
+    input[type="text"],input[type="password"]{
+          width: 100%;
+          padding: 7px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          resize: vertical;
+      }
+    button{
+        width:200px;
+        height:50px;
+        color: white;
+        border:none;
+        cursor:pointer;
+        font-size: 20px;
+        background-color:#4CAF50;
+      }
+    button:hover{
+            background-color:#45a049;
+      }
+
+    th,td,tr{
+            border: 1px solid black;
+            text-align:center;
+            padding-left:15px;
+            padding-right:15px;
+    }
+
+</style>
+{%endblock%}
+
+{%block body%}
+
+<div class="container" style="padding-top:100px;padding-bottom:50px">
+    <p style="color:red;text-align:center">{{message}}</p>
+    <div class="row"  align="center">
+        <div class="col-2" style="padding:50px"></div>
+        <div class="col-8" style="border:solid;padding:30px;background-color:#ed9d53;border-radius:10px">
+            <h3 style="text-align:center">Search</h3>
+            <div class="container">
+                <form action="{{url_for('home')}}" method="post">
+                    <div>
+                        <div class="eachrow">
+                            <label style="width:100%">Book</label>
+                            <input type="text" placeholder="Enter ISBN, Title, or Author of the book" name="search">
+                        </div>
+                        <!--
+                        <div class="eachrow">
+                            <label style="width:100%">Confirm Password</label>
+                            <input type="password" placeholder="Confirm Your Password" name="confirmpassword">
+                        </div>
+                        -->
+                    </div>
+                    <p align="center" style="padding-top:30px">
+                        <button style="border:solid black;border-radius:5px">
+                            Search
+                        </button>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <div class="col-2" style="padding:50px"></div>
+    </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,126 @@
+{%extends 'layout.html'%}
+
+{%block title%}
+<title>{{book.title}}</title>
+<style>
+    input[type="text"],input[type="password"],textarea,input[name="rating"]{
+          width: 100%;
+          padding: 7px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          resize: vertical;
+      }
+    button{
+        width:150px;
+        height:40px;
+        color: white;
+        border:none;
+        cursor:pointer;
+        font-size: 20px;
+        background-color:#4CAF50;
+      }
+    button:hover{
+            background-color:#45a049;
+      }
+
+    th,td,tr{
+            border: 1px solid black;
+            text-align:center;
+            padding-left:15px;
+            padding-right:15px;
+    }
+
+</style>
+{%endblock%}
+
+{%block body%}
+<div class="container" style="padding-top:100px;padding-bottom:50px">
+    <div class="row">
+        <div class="col-2" style="padding:50px"></div>
+        <div class="col-8" style="padding:30px;background-color:#f0f0f0;border-radius:10px">
+            <div class="container">
+                <div class="row" align="center">
+                    <div class="col-4"><strong>Book Name</strong></div>
+                    <div class="col-4">{{book.title}}</div>
+                </div>
+                <hr />
+                <div class="row" align="center">
+                    <div class="col-4"><strong>Author</strong></div>
+                    <div class="col-4">{{book.author}}</div>
+                </div>
+                <hr />
+                <div class="row" align="center">
+                    <div class="col-4"><strong>Year</strong></div>
+                    <div class="col-4">{{book.year}}</div>
+                </div>
+                <hr />
+                <div class="row" align="center">
+                    <div class="col-4"><strong>ISBN</strong></div>
+                    <div class="col-4">{{book.isbn}}</div>
+                </div>
+                <hr />
+                <div class="row" align="center">
+                    <div class="col-4"><strong>Rating</strong></div>
+                    <div class="col-4">{{avg}}</div>
+                </div>
+                <hr />
+                <div class="row" align="center">
+                    <div class="col-4"><strong>Goodreads Average Rating</strong></div>
+                    <div class="col-4">{{average_rating}}</div>
+                </div>
+                <hr />
+                <div class="row" align="center">
+                    <div class="col-4"><strong>Goodreads Number of Ratings</strong></div>
+                    <div class="col-4">{{review_count}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2" style="padding:50px"></div>
+    </div>
+</div>
+<div class="container" style="padding-top:100px;padding-bottom:50px">
+    <div class="row">
+        <div class="col-2" style="padding:50px"></div>
+        <div class="col-8" style="padding:30px;background-color:#f0f0f0;border-radius:10px">
+            <h3 style="text-align:center">Reviews</h3>
+            <hr />
+            {% for review in reviews %}
+                <div>
+                    <p><strong>{{review.username}}</strong></p>
+                    <p>{{review.review}}</p>
+                    <p>rating:{{review.rating}}</p>
+                </div>
+            {% endfor %}
+            {% if user %}
+                <form action="{{url_for('book',isbn=book.isbn)}}" method="post">
+                    <div>
+                        <div class="eachrow">
+                            <label style="width:100%">Comment</label>
+                            <textarea type="text" placeholder="Write review here" name="review" style="height:200px"></textarea>
+                        </div>
+                        <div class="eachrow">
+                            <label style="width:100%">Rating(1-5)</label>
+                            <input name="rating" list="ratings" placeholder="Rating">
+                            <datalist id="ratings">
+                                <option value="1">
+                                <option value="2">
+                                <option value="3">
+                                <option value="4">
+                                <option value="5">
+                        </div>
+                    </div>
+                    <p align="right" style="padding-top:30px">
+                        <button style="border:solid black;border-radius:5px">
+                            Comment
+                        </button>
+                    </p>
+                </form>
+            {% endif %}
+        </div>
+        <div class="col-2" style="padding:50px"></div>
+    </div>
+</div>
+{%endblock%}
